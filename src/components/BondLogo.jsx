@@ -1,5 +1,5 @@
 import { Box, SvgIcon } from "@material-ui/core";
-
+import TokenSymbol from './TokenSymbol'
 function BondLogo({ bond }) {
   let viewBox = "0 0 32 32";
   let style = { height: "32px", width: "32px" };
@@ -10,6 +10,8 @@ function BondLogo({ bond }) {
     style = { height: "32px", width: "62px" };
   }
 
+  return <TokenSymbol size={32} symbol={bond.bondToken}/> 
+  // console.error({bond})
   return (
     <Box display="flex" alignItems="center" justifyContent="center" width={"64px"}>
       <SvgIcon component={bond.bondIconSvg} viewBox={viewBox} style={style} />

@@ -26,14 +26,14 @@ import { StaticJsonRpcProvider } from "@ethersproject/providers";
 // TODO(zx): Further modularize by splitting up reserveAssets into vendor token definitions
 //   and include that in the definition of a bond
 export const dai = new StableBond({
-  name: "dai",
-  displayName: "DAI",
-  bondToken: "DAI",
+  name: "BUSD",
+  displayName: "BUSD",
+  bondToken: "BUSD",
   bondIconSvg: DaiImg,
   bondContractABI: DaiBondContract,
   networkAddrs: {
     [NetworkID.Mainnet]: {
-      bondAddress: "0xeAD8D3b530a63eB475931c6663abE8B94843c93f",
+      bondAddress: "0xAFAb5E20D28CFB40D7Df87CC8483Ba211b8b29Fd",
       reserveAddress: "0x3F02C8B8c2b7048B0903511F4E298e30f8f01993",
     },
     [NetworkID.Testnet]: {
@@ -73,14 +73,14 @@ export const eth = new CustomBond({
 export const ohm_dai = new LPBond({
   name: "pid_busd_lp",
   displayName: "PID-BUSD LP",
-  bondToken: "BUSD",
+  bondToken: "PID-BUSD",
   bondIconSvg: OhmDaiImg,
   bondContractABI: BondOhmDaiContract,
   reserveContract: ReserveOhmDaiContract,
   networkAddrs: {
     [NetworkID.Mainnet]: {
-      bondAddress: "0x81554Daaa723b96012B9Ae8616239bCf67d7E854",
-      reserveAddress: "0x58d880Da6E01737C96d928A4cEba90aff7fd58B1",
+      bondAddress: "0xA6D71899dd085848265bb1A9e6bdD2B0766B471A",
+      reserveAddress: "0x98d3f2E6247b89AB69Bff0138863450e84F6e0D3",
     },
     [NetworkID.Testnet]: {
       bondAddress: "0xcF449dA417cC36009a1C6FbA78918c31594B9377",
@@ -88,7 +88,7 @@ export const ohm_dai = new LPBond({
     },
   },
   lpUrl:
-    "https://pancakeswap.finance/add/0x11e2d3a986300eD0cD995Ad5286db95CFD7393c3/0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+   `https://pancakeswap.finance/add/${addresses[NetworkID.Mainnet].DAI_ADDRESS}/${addresses[NetworkID.Mainnet].PID_ADDRESS}`,
 });
 export const frax = new StableBond({
   name: "frax",
@@ -149,8 +149,8 @@ export const ohm_frax = new LPBond({
     "https://app.uniswap.org/#/add/v2/0x853d955acef822db058eb8505911ed77f175b99e/0x383518188c0c6d7730d91b2c03a03c837814a899",
 });
 
-export const ohm_lusd = new LPBond({
-  name: "ohm_lusd_lp",
+export const pid_lusd = new LPBond({
+  name: "pid_lusd_lp",
   displayName: "OHM-LUSD LP",
   bondToken: "LUSD",
   bondIconSvg: OhmLusdImg,
@@ -175,9 +175,9 @@ export const ohm_lusd = new LPBond({
 // Is it a stableCoin bond? use `new StableBond`
 // Is it an LP Bond? use `new LPBond`
 // Add new bonds to this array!!
-// export const allBonds = [dai, frax, eth, ohm_dai, ohm_frax, lusd, ohm_lusd];
+// export const allBonds = [dai, frax, eth, ohm_dai, ohm_frax, lusd, pid_lusd];
 
-export const allBonds = [dai,eth,ohm_dai]
+export const allBonds = [dai,ohm_dai]
 // export const allBonds:LPBond[]=[]
 export const treasuryBalanceAll = async ( networkID: NetworkID, provider: StaticJsonRpcProvider) => {
   return (await Promise.all(allBonds.map(async (item) => {

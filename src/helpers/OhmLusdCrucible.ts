@@ -1,25 +1,25 @@
 import { StaticJsonRpcProvider } from "@ethersproject/providers";
 import { NetworkID } from "src/lib/Bond";
-import { ohm_lusd, lusd } from "../helpers/AllBonds";
-import { abi as OhmLusdCrucible } from "src/abi/OhmLusdCrucible.json";
+import { pid_lusd, lusd } from "../helpers/AllBonds";
+import { abi as PidLusdCrucible } from "src/abi/PidLusdCrucible.json";
 import { abi as UniswapIERC20 } from "src/abi/UniswapIERC20.json";
 import { BigNumber, ethers } from "ethers";
 import { addresses } from "src/constants";
 import { getTokenPrice } from "../helpers";
 
 export const calcAludelDetes = async (networkID: NetworkID, provider: StaticJsonRpcProvider) => {
-  const crucibleAddress = addresses[networkID].CRUCIBLE_OHM_LUSD;
-  const aludelContract = new ethers.Contract(crucibleAddress as string, OhmLusdCrucible, provider);
+  const crucibleAddress = addresses[networkID].CRUCIBLE_PID_LUSD;
+  const aludelContract = new ethers.Contract(crucibleAddress as string, PidLusdCrucible, provider);
   const aludelData = await aludelContract.getAludelData();
   // getting contractAddresses & Pricing for calculations below
   let ohmPrice = await getTokenPrice("olympus");
-  let ohmContractAddress = addresses[networkID].OHM_ADDRESS.toLowerCase();
+  let ohmContractAddress = addresses[networkID].PID_ADDRESS.toLowerCase();
 
   let lusdPrice = await getTokenPrice("liquity-usd");
   let lusdContractAddress = lusd.getAddressForReserve(networkID).toLowerCase();
 
-  let ohmLusdPrice = await ohm_lusd.getBondReservePrice(networkID, provider);
-  let ohmLusdContractAddress = ohm_lusd.getAddressForReserve(networkID).toLowerCase();
+  let ohmLusdPrice = await pid_lusd.getBondReservePrice(networkID, provider);
+  let ohmLusdContractAddress = pid_lusd.getAddressForReserve(networkID).toLowerCase();
 
   let lqtyPrice = await getTokenPrice("liquity");
   let lqtyContractAddress = addresses[networkID].LQTY.toLowerCase();

@@ -170,7 +170,7 @@ function NavContent() {
 
 
 
-              {/* <div className="dapp-menu-data discounts">
+              <div className="dapp-menu-data discounts">
                 <div className="bond-discounts">
                   <Typography variant="body2">Bond discounts</Typography>
                   {bonds.map((bond, i) => (
@@ -188,7 +188,7 @@ function NavContent() {
                     </ANavLink>
                   ))}
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>

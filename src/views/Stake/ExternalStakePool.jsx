@@ -38,7 +38,7 @@ export default function ExternalStakePool() {
   });
 
   const ohmLusdReserveBalance = useSelector(state => {
-    return state.account && state.account.bonds?.ohm_lusd_lp?.balance;
+    return state.account && state.account.bonds?.pid_lusd_lp?.balance;
   });
 
   const loadLusdData = async () => {

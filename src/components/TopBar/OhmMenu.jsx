@@ -48,8 +48,8 @@ function OhmMenu() {
 
   const networkID = chainID;
 
-  const SOHM_ADDRESS = addresses[networkID].SOHM_ADDRESS;
-  const OHM_ADDRESS = addresses[networkID].OHM_ADDRESS;
+  const SPID_ADDRESS = addresses[networkID].SPID_ADDRESS;
+  const PID_ADDRESS = addresses[networkID].PID_ADDRESS;
   const PT_TOKEN_ADDRESS = addresses[networkID].PT_TOKEN_ADDRESS;
 
   const handleClick = event => {
@@ -79,7 +79,7 @@ function OhmMenu() {
               <Paper className="ohm-menu" elevation={1}>
                 <Box component="div" className="buy-tokens">
                   <Link
-                    href={`https://app.sushi.com/swap?inputCurrency=${daiAddress}&outputCurrency=${OHM_ADDRESS}`}
+                    href={`https://app.sushi.com/swap?inputCurrency=${daiAddress}&outputCurrency=${PID_ADDRESS}`}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -91,7 +91,7 @@ function OhmMenu() {
                   </Link>
 
                   <Link
-                    href={`https://app.uniswap.org/#/swap?inputCurrency=${fraxAddress}&outputCurrency=${OHM_ADDRESS}`}
+                    href={`https://app.uniswap.org/#/swap?inputCurrency=${fraxAddress}&outputCurrency=${PID_ADDRESS}`}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -116,7 +116,7 @@ function OhmMenu() {
                     <Divider color="secondary" />
                     <p>ADD TOKEN TO WALLET</p>
                     <Box display="flex" flexDirection="row" justifyContent="space-between">
-                      <Button variant="contained" color="secondary" onClick={addTokenToWallet("OHM", OHM_ADDRESS)}>
+                      <Button variant="contained" color="secondary" onClick={addTokenToWallet("OHM", PID_ADDRESS)}>
                         <SvgIcon
                           component={ohmTokenImg}
                           viewBox="0 0 32 32"
@@ -124,7 +124,7 @@ function OhmMenu() {
                         />
                         <Typography variant="body1">OHM</Typography>
                       </Button>
-                      <Button variant="contained" color="secondary" onClick={addTokenToWallet("sOHM", SOHM_ADDRESS)}>
+                      <Button variant="contained" color="secondary" onClick={addTokenToWallet("sOHM", SPID_ADDRESS)}>
                         <SvgIcon
                           component={sOhmTokenImg}
                           viewBox="0 0 100 100"

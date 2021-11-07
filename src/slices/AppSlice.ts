@@ -95,9 +95,9 @@ export const loadAppDetails = createAsyncThunk(
     //   OlympusStaking,
     //   provider,
     // );
-    const sohmMainContract = new ethers.Contract(addresses[networkID].SOHM_ADDRESS as string, sOHMv2, provider);
-    const ohmMainContract = new ethers.Contract(addresses[networkID].OHM_ADDRESS as string, sOHMv2, provider);
-    // const sohmOldContract = new ethers.Contract(addresses[networkID].OLD_SOHM_ADDRESS as string, sOHM, provider);
+    const sohmMainContract = new ethers.Contract(addresses[networkID].SPID_ADDRESS as string, sOHMv2, provider);
+    const ohmMainContract = new ethers.Contract(addresses[networkID].PID_ADDRESS as string, sOHMv2, provider);
+    // const sohmOldContract = new ethers.Contract(addresses[networkID].OLD_SPID_ADDRESS as string, sOHM, provider);
 
     const totalSupply = Number(getDisplayBalance(await ohmMainContract.totalSupply(), 9));
 
@@ -105,14 +105,9 @@ export const loadAppDetails = createAsyncThunk(
     // Calculating staking
     const epoch = await stakingContract.epoch();
     const stakingReward = epoch.distribute;
-    console.error(sohmMainContract.address)
     const circ = await sohmMainContract.circulatingSupply();
     const stakingRebase = stakingReward / circ;
-    console.error({ 
-      stakingReward:stakingReward.toString(), 
-      circ:circ.toString(), 
-      stakingRebase
-     })
+    
 
     const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
     const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1;
