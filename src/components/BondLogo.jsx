@@ -9,8 +9,12 @@ function BondLogo({ bond }) {
     viewBox = "0 0 64 32";
     style = { height: "32px", width: "62px" };
   }
+  // if(!bond.bondToken){
 
-  return <TokenSymbol size={32} symbol={bond.bondToken}/> 
+  //   console.error({bond})
+  // }
+
+  return <TokenSymbol size={32} symbol={bond.bondToken || bond.bond}/> 
   // console.error({bond})
   return (
     <Box display="flex" alignItems="center" justifyContent="center" width={"64px"}>

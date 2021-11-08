@@ -8,6 +8,7 @@ import { Skeleton } from "@material-ui/lab";
 
 import { trim, subtractDates } from "src/helpers";
 import TuImg from '../../assets/tu.png'
+import Tu2Img from '../../assets/tu2.png'
 
 export const PoolPrize = () => {
   const { provider, chainID } = useWeb3Context();
@@ -100,8 +101,12 @@ export const PoolPrize = () => {
 
   return (
     <Box width="100%" display="flex" flexDirection="column" alignItems="center" className="pool-prize-card">
-      <Box className="vegas-container">
+      <Box className="vegas-container-pc">
         <img src={TuImg} style={{width:'100%'}}/>
+        {/* <Box className="vegas"></Box> */}
+      </Box>
+      <Box className="vegas-container-mob">
+        <img src={Tu2Img} style={{width:'100%'}}/>
         {/* <Box className="vegas"></Box> */}
       </Box>
       <Paper className="ohm-card">

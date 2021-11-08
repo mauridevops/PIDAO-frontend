@@ -78,13 +78,13 @@ function NavContent() {
               <img src={LogoImg} alt="" style={{ width: "151px" }} />
             </Link>
 
-            {address && (
+            {/* {address && (
               <div className="wallet-link">
                 <Link href={`https://etherscan.io/address/${address}`} target="_blank">
                   {shorten(address)}
                 </Link>
               </div>
-            )}
+            )} */}
           </Box>
 
           <div className="dapp-menu-links">

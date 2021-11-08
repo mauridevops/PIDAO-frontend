@@ -34,7 +34,7 @@ export const dai = new StableBond({
   networkAddrs: {
     [NetworkID.Mainnet]: {
       bondAddress: "0xAFAb5E20D28CFB40D7Df87CC8483Ba211b8b29Fd",
-      reserveAddress: "0x3F02C8B8c2b7048B0903511F4E298e30f8f01993",
+      reserveAddress: addresses[NetworkID.Mainnet].DAI_ADDRESS,
     },
     [NetworkID.Testnet]: {
       bondAddress: "0xDea5668E815dAF058e3ecB30F645b04ad26374Cf",
@@ -71,7 +71,7 @@ export const eth = new CustomBond({
 });
 
 export const ohm_dai = new LPBond({
-  name: "pid_busd_lp",
+  name: "PID-BUSD",
   displayName: "PID-BUSD LP",
   bondToken: "PID-BUSD",
   bondIconSvg: OhmDaiImg,

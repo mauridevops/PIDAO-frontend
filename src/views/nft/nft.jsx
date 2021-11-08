@@ -13,45 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination } from 'swiper'
 import 'swiper/swiper.min.css'
 SwiperCore.use([Pagination])
-const NFTArr = [
-  {
-    name: 'Cappa',
-    Level: '1',
-    Hashrate: '1000',
-    Rarity: '1',
-    Probability: '60%'
-  }, {
-    name: 'Etta',
-    Level: '2',
-    Hashrate: '2000',
-    Rarity: '2',
-    Probability: '50%'
-  }, {
-    name: 'Mocci',
-    Level: '3',
-    Hashrate: '3000',
-    Rarity: '3',
-    Probability: '40%'
-  }, {
-    name: 'Lamb',
-    Level: '4',
-    Hashrate: '4000',
-    Rarity: '4',
-    Probability: '30%'
-  }, {
-    name: 'Gamma',
-    Level: '5',
-    Hashrate: '5000',
-    Rarity: '5',
-    Probability: '20%'
-  }, {
-    name: 'Betta',
-    Level: '1',
-    Hashrate: '1000',
-    Rarity: '1',
-    Probability: '60%'
-  }
-]
+
 export const NFTBySymbol = {
   'Cappa': NFTIcon1,
   'Etta': NFTIcon2,
@@ -86,6 +48,47 @@ const NFTPage = () => {
   const [scleft,setScLeft]=useState(0)
   const refdom=useRef()
 
+  const NFTArr = useMemo(()=>{
+    return [
+      {
+        name: 'Cappa',
+        Level: '1',
+        Hashrate: '1000',
+        Rarity: '1',
+        Probability: '60%'
+      }, {
+        name: 'Etta',
+        Level: '2',
+        Hashrate: '2000',
+        Rarity: '2',
+        Probability: '50%'
+      }, {
+        name: 'Mocci',
+        Level: '3',
+        Hashrate: '3000',
+        Rarity: '3',
+        Probability: '40%'
+      }, {
+        name: 'Lamb',
+        Level: '4',
+        Hashrate: '4000',
+        Rarity: '4',
+        Probability: '30%'
+      }, {
+        name: 'Gamma',
+        Level: '5',
+        Hashrate: '5000',
+        Rarity: '5',
+        Probability: '20%'
+      }, {
+        name: 'Betta',
+        Level: '1',
+        Hashrate: '1000',
+        Rarity: '1',
+        Probability: '60%'
+      }
+    ]
+  },[window])
   const num = useMemo(()=>{
     const sl = 350
     return (scleft/sl +1).toFixed(0)
@@ -98,9 +101,10 @@ const NFTPage = () => {
     }
   },[])
   useEffect(()=>{
-    console.error(refdom.current.addEventListener('scroll',testFc))
-    return ()=>refdom.current.remove('scroll',testFc)
+    refdom.current.addEventListener('scroll',testFc)
+    // return ()=>refdom.current.remove('scroll',testFc)
   },[refdom.current?.offsetLeft])
+  // console.error(NFTArr)
   return (
     <div>
       {/* 顶部介绍不分 pc*/}
@@ -138,8 +142,7 @@ const NFTPage = () => {
       {/* 卡牌部分 */}
       <div ref={refdom} className="bordBox">
         {/* 卡牌 */}
-        {NFTArr.map((item, key) =>
-          <div className="cord">
+        {NFTArr.map((item, key) =><div key={key} className="cord">
             <TokenSymbol symbol={item.name} alt="" className="cordimg" />
             <div>
               <div className="Entry1"><span>{item.name}</span></div>

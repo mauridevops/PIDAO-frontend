@@ -106,7 +106,7 @@ function Home() {
     return Date.now() < (1636113600000 + 86400000) 
   },[])
   const openOverTimes=useMemo(()=>{
-    return (1636113600000 + (86400000 * 2) )
+    return 1636372800000 
   },[isOpen])
   const isOver = useMemo(()=>{
     return Date.now() > openOverTimes
@@ -201,7 +201,7 @@ function Home() {
       <div style={{ height: 30 }}></div>
       <div className="DaoJishi">
         {isOpen ? <>
-          <span>Time remaining for payment</span><TimeCountdown onComplete={onComplete} base={new Date} deadline={new Date(openOverTimes)} />
+          <span>Launch in</span><TimeCountdown onComplete={onComplete} base={new Date} deadline={new Date(openOverTimes)} />
           
         </>:<>
           <span>ITO Application Ends In</span><TimeCountdown onComplete={onComplete} base={new Date} deadline={new Date(openStartTimes)} />
