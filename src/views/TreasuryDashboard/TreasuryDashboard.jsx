@@ -242,7 +242,7 @@ function TreasuryDashboard() {
                   </Typography>
                   <Typography variant="h5">
                     {circSupply && totalSupply ? (
-                      (formatCurrency(circSupply, 2)) + " / " + (formatCurrency(totalSupply, 2))
+                      (trim(circSupply, 2)) + " / " + (trim(totalSupply, 2))
                     ) : (
                       <Skeleton type="text" />
                     )}

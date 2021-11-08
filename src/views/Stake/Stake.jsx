@@ -167,7 +167,7 @@ function Stake() {
                   <Link
                     className="migrate-sohm-button"
                     style={{ textDecoration: "none" }}
-                    href="https://docs.olympusdao.finance/using-the-website/migrate"
+                    href="https://docs.pidao.finance/"
                     aria-label="migrate-sohm"
                     target="_blank"
                   >

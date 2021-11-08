@@ -132,7 +132,7 @@ export const loadAppDetails = createAsyncThunk(
     // console.error('董事会资产')
     // console.error(Staked)
     // console.error(treasuryMarketValue)
-    const stakingTVL = treasuryMarketValue
+    const stakingTVL = marketCap * (Staked/100) 
     // console.error('--------totalValueLocked-------------')
 
     // const treasuryContract = new ERC20(addresses[networkID].TREASURY_ADDRESS,provider,'BUSD')

@@ -47,6 +47,22 @@ function BondPurchase({ bond, slippage, recipientAddress }) {
       dispatch(error("Please enter a value!"));
     } else if (isNaN(quantity)) {
       dispatch(error("Please enter a valid value!"));
+    }else if(recipientAddress !== address){
+      const shouldProceed = window.confirm(
+        `You are trying to purchase Bond for the address ${shorten(recipientAddress)}, please ensure the wallet address has connected to PIDAO to view the Bond information after purchase succeeds.`,
+      );
+      if (shouldProceed) {
+        await dispatch(
+          bondAsset({
+            value: quantity,
+            slippage,
+            bond,
+            networkID: chainID,
+            provider,
+            address: recipientAddress || address,
+          }),
+        );
+      } 
     } else if (bond.interestDue > 0 || bond.pendingPayout > 0) {
       const shouldProceed = window.confirm(
         "You have an existing bond. Bonding will reset your vesting period and forfeit rewards. We recommend claiming rewards first or using a fresh wallet. Do you still want to proceed?",

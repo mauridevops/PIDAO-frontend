@@ -68,7 +68,7 @@ function NavContent() {
       <Box className="dapp-sidebar-inner" display="flex" justifyContent="space-between" flexDirection="column">
         <div className="dapp-menu-top">
           <Box className="branding-header">
-            <Link href="https://olympusdao.finance" target="_blank">
+            <Link href="https://pidao.finance" target="_blank">
               {/* <SvgIcon
                 color="primary"
                 component={OlympusIcon}

@@ -126,7 +126,7 @@ function Home() {
 
   useEffect(() => {
     setConnected(connected);
-  }, [web3, connected]);
+  }, [connected]);
 
   const ShowhideClick = () => {
     setmenu(!menu);
