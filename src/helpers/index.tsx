@@ -19,10 +19,12 @@ export async function getMarketPrice({ networkID, provider }: IBaseAsyncThunk) {
   const pairContract = new ethers.Contract(ohm_dai_address, PairContract, provider);
   const reserves = await pairContract.getReserves();
 
-  const reserves0 = getDisplayBalance(reserves[1],9)
-  const reserves1 = getDisplayBalance(reserves[0],18)
+  
+  console.error(reserves[0].toString())
+  const reserves0 = getDisplayBalance(reserves[1],18)
+  const reserves1 = getDisplayBalance(reserves[0],9,2)
 
-  const marketPrice = (Number(reserves1))/Number(reserves0);
+  const marketPrice = (Number(reserves0))/Number(reserves1);
 
   // console.error('测试参数')
   // console.error(marketPrice)

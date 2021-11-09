@@ -12,6 +12,7 @@ import { RootState } from "src/store";
 import { IBaseAsyncThunk } from "./interfaces";
 import { allBonds, treasuryBalanceAll } from "src/helpers/AllBonds";
 import ERC20 from '../lib/ERC20'
+import  { abi as DistributorContractAbi } from '../abi/DistributorContract.json'
 
 const initialState = {
   loading: false,
@@ -78,6 +79,7 @@ export const loadAppDetails = createAsyncThunk(
         marketPrice,
         marketCap: 0,
         circSupply: 0,
+        
         totalSupply: 0,
         treasuryMarketValue: 0,
       };
@@ -97,8 +99,10 @@ export const loadAppDetails = createAsyncThunk(
     // );
     const sohmMainContract = new ethers.Contract(addresses[networkID].SPID_ADDRESS as string, sOHMv2, provider);
     const ohmMainContract = new ethers.Contract(addresses[networkID].PID_ADDRESS as string, sOHMv2, provider);
+    const DistributorContract = new ethers.Contract(addresses[networkID].DISTRIBUTOR_ADDRESS as string, DistributorContractAbi, provider);
     // const sohmOldContract = new ethers.Contract(addresses[networkID].OLD_SPID_ADDRESS as string, sOHM, provider);
 
+    const endBlock = (await DistributorContract.nextEpochBlock()).toNumber()
     const totalSupply = Number(getDisplayBalance(await ohmMainContract.totalSupply(), 9));
 
 
@@ -146,6 +150,7 @@ export const loadAppDetails = createAsyncThunk(
     return {
       currentIndex: ethers.utils.formatUnits(currentIndex, "gwei"),
       currentBlock,
+      endBlock,
       fiveDayRate,
       stakingAPY,
       stakingTVL,
@@ -153,6 +158,7 @@ export const loadAppDetails = createAsyncThunk(
       stakingRebase,
       marketCap,
       marketPrice,
+      circVal:circ,
       circSupply,
       totalSupply,
       treasuryMarketValue
@@ -210,7 +216,7 @@ const loadMarketPrice = createAsyncThunk("app/loadMarketPrice", async ({ network
     marketPrice = await getMarketPrice({ networkID, provider });
     marketPrice = marketPrice;
   } catch (e) {
-    marketPrice = await getTokenPrice("olympus");
+    marketPrice = 0;
   }
   return { marketPrice };
 });
@@ -219,8 +225,10 @@ interface IAppData {
   readonly circSupply: number;
   readonly currentIndex?: string;
   readonly currentBlock?: number;
+  readonly endBlock?:number;
   readonly fiveDayRate?: number;
   readonly marketCap: number;
+  readonly circVal?:number;
   readonly marketPrice: number;
   readonly stakingAPY?: number;
   readonly stakingRebase?: number;

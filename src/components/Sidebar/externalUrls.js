@@ -25,7 +25,7 @@ const externalUrls = [
     title: "Feedback",
     url: "https://docs.google.com/forms/d/e/1FAIpQLScnaNowC-y5Yj9QET3j67aqpKN6FWFAit973ICQzAsERaVw0w/viewform",
     icon: <SvgIcon color="primary" component={FeedbackIcon} />,
-  },
+  }
 ];
 
 export default externalUrls;

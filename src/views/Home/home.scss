@@ -173,7 +173,7 @@
 // }
 .valueColor {
     font-family: Arial;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: bold;
     color: #ffe300;
 }
@@ -333,6 +333,10 @@
     height: 30px;
     margin: 0 25px;
     cursor: pointer;
+
+    @media (min-width: 1000px) {
+    margin: 0 15px;
+    }
 }
 .bottomImgs2 {
     height: 30px;

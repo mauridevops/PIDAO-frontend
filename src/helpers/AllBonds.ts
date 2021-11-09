@@ -33,7 +33,7 @@ export const dai = new StableBond({
   bondContractABI: DaiBondContract,
   networkAddrs: {
     [NetworkID.Mainnet]: {
-      bondAddress: "0xAFAb5E20D28CFB40D7Df87CC8483Ba211b8b29Fd",
+      bondAddress: "0xF46764743fF3d9B29CD6Cdb1D692221e32ef42e5",
       reserveAddress: addresses[NetworkID.Mainnet].DAI_ADDRESS,
     },
     [NetworkID.Testnet]: {
@@ -79,8 +79,8 @@ export const ohm_dai = new LPBond({
   reserveContract: ReserveOhmDaiContract,
   networkAddrs: {
     [NetworkID.Mainnet]: {
-      bondAddress: "0xA6D71899dd085848265bb1A9e6bdD2B0766B471A",
-      reserveAddress: "0x98d3f2E6247b89AB69Bff0138863450e84F6e0D3",
+      bondAddress: "0x20A633EF2b83bc5912e1b97ba94865B29816BE53",
+      reserveAddress: "0x3991e0988A69E4C8Fde46C011Dafe55E26fdD18D",
     },
     [NetworkID.Testnet]: {
       bondAddress: "0xcF449dA417cC36009a1C6FbA78918c31594B9377",
@@ -177,8 +177,8 @@ export const pid_lusd = new LPBond({
 // Add new bonds to this array!!
 // export const allBonds = [dai, frax, eth, ohm_dai, ohm_frax, lusd, pid_lusd];
 
-// export const allBonds = [dai,ohm_dai]
-export const allBonds:LPBond[]=[]
+export const allBonds = [dai,ohm_dai]
+// export const allBonds:LPBond[]=[]
 export const treasuryBalanceAll = async ( networkID: NetworkID, provider: StaticJsonRpcProvider) => {
   return (await Promise.all(allBonds.map(async (item) => {
     // console.error(await item.getTreasuryBalance(networkID,provider))

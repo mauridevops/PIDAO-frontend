@@ -1,6 +1,6 @@
 import { useDispatch,useSelector } from "react-redux";
 import { Paper, Grid, Typography, Box, Zoom,Button } from "@material-ui/core";
-import { trim } from "../../helpers";
+import { formatCurrency, getDisplayBalance, trim } from "../../helpers";
 import {useEffect,useCallback, useMemo} from 'react'
 import { useWeb3Context } from "src/hooks/web3Context";
 import "./home.scss";
@@ -27,6 +27,7 @@ import { FixedFormat } from "@ethersproject/bignumber";
 import styled from "styled-components";
 import PdImg from '../../assets/ohm/pd.png'
 import WuImg from '../../assets/ohm/wu.png'
+import DiscordImg from '../../assets/dis.png'
 import GuanImg from '../../assets/ohm/copy-2-3@3x.png'
 import { shorten } from "../../helpers";
 import { isPendingTxn, txnButtonText } from "src/slices/PendingTxnsSlice";
@@ -41,10 +42,18 @@ function Home() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [delayShow,setDelayShow] = useState(false)
 
+  const stakedTotal= useSelector(state => {
+    // console.error(state.app?.circVal)
+    
+    return state?.app?.circVal ? getDisplayBalance(state?.app?.circVal,9):null;
+  });
   const pendingTransactions = useSelector(state => {
     return state.pendingTransactions;
   });
   
+  const treasuryMarketValue = useSelector(state => {
+    return state.app.treasuryMarketValue;
+  });
   let buttonText = "Connect Wallet";
   let clickFunc = connect;
 
@@ -100,7 +109,9 @@ function Home() {
   const isOpen = useMemo(() => {
     return Date.now() > openStartTimes
   },[delayShow,openStartTimes]);
-
+  const stakingAPY = useSelector(state=>{
+    return state.app.stakingAPY
+  })
   
   const openIsPayTime = useMemo(()=>{
     return Date.now() < (1636113600000 + 86400000) 
@@ -144,13 +155,6 @@ function Home() {
     }else{
       clickFunc()
     }
-    // if(!Popup){
-    //   timeId && clearTimeout(timeId)
-    //   timeId = setTimeout(() => setDelayShow(true), 1000);
-    // }else{
-    //   timeId && clearTimeout(timeId)
-    //   timeId = setTimeout(() => setDelayShow(false), 1000);
-    // }
   }
 
 
@@ -160,8 +164,8 @@ function Home() {
       <img src={Logoimg} alt="" className="logo" />
       <ul className="uls">
         <li className="lis"><a className="a" href="https://pidao.gitbook.io/homepage/whitepapers/pidao-pro">PIDAO Pro</a></li>
-        <li className="lis"><a className="a" href="javaScript:;">Stake</a></li>
-        <li className="lis"><a className="a" href="javaScript:;">Bond</a></li>
+        <li className="lis"><a className="a" href="/stake">Stake</a></li>
+        <li className="lis"><a className="a" href="/bonds">Bond</a></li>
         <li className="lis"><a className="a" href="https://pidao.gitbook.io/homepage/pidao-finance/faqs">FAQs</a></li>
         <li className="lis"><a className="a" href="https://pidao.gitbook.io/homepage/community/governance">Get Involved</a></li>
       </ul>
@@ -199,45 +203,47 @@ function Home() {
         Reserve Currency
       </div>
       <div style={{ height: 30 }}></div>
-      <div className="DaoJishi">
+      {/* <div className="DaoJishi">
         {isOpen ? <>
           <span>Launch in</span><TimeCountdown onComplete={onComplete} base={new Date} deadline={new Date(openOverTimes)} />
           
         </>:<>
           <span>ITO Application Ends In</span><TimeCountdown onComplete={onComplete} base={new Date} deadline={new Date(openStartTimes)} />
         </>} 
-      </div>
+      </div> */}
 
-      <div style={{ display: "flex", justifyContent: "center", }}>
-       { isOpen ? <div className="ZhiFuBtn" onClick={() => PopupClick()}>
-         {isOpen ? (isOver === true ? 'Concluded' : (isPay === true ? 'Purchased' : 'Purchase ( ITO )')):''} 
-        </div>:
-       <>
+      {/* <div style={{ display: "flex", justifyContent: "center", }}>
+       
        <a href="https://medium.com/@PIDAOFinance/initial-telegram-offering-the-pidao-fair-launch-event-fafc6ec009aa" style={{ color: "#fff" }} target="_blank">ITO Rules</a>
         <div style={{ width: 20 }} />
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfM6zyJyhaOcp-QmOzZmleU4wVthPP13x-HamiKO5cMiTwHUw/viewform" style={{ color: "#fff" }} target="_blank">Apply Now</a>
       
-       </>  }
-      </div>
+      </div> */}
       <div className="contentStyle">
         PIDAO is a decentralized reserve currency protocol based on the PID token and aims at building a community-owned decentralized financial infrastructure for the crypto world.
       </div>
       <div className="fxBetween">
-        <Link to="/" className="btnBox_1">Enter App</Link>
+        <a href="/stake" className="btnBox_1">Enter App</a>
         <a href="https://pidao.gitbook.io/homepage/" className="btnBox_2 a" target="_blank">Documentation</a>
       </div>
       <div className="fxBetween2 mgTop">
         <div className="fxColumn2">
           <div className="minTatleColor">Total Staked</div>
-          <div className="valueColor">coming soon</div>
+          <div style={{minWidth:80,textAlign:'center'}} className="valueColor">
+            {stakedTotal ? trim(stakedTotal, 2): <Skeleton type="text" />}
+            </div>
         </div>
         <div className="fxColumn2 mgLf">
           <div className="minTatleColor">Treasury Balance</div>
-          <div className="valueColor">coming soon</div>
+          <div style={{minWidth:80,textAlign:'center'}}  className="valueColor">
+            {treasuryMarketValue ? formatCurrency(treasuryMarketValue, 2) : <Skeleton type="text" />}
+          </div>
         </div>
         <div className="fxColumn2 mgLf">
           <div className="minTatleColor">Current APY</div>
-          <div className="valueColor">coming soon</div>
+          <div style={{minWidth:80,textAlign:'center'}}  className="valueColor">
+          {stakingAPY ? `${trim(stakingAPY*100, 2)}%` : <Skeleton type="text" />}
+          </div>
         </div>
       </div>
     </div>
@@ -245,16 +251,17 @@ function Home() {
     <div className="bottomBor a">
       <a href="https://twitter.com/PIDAOFinance" target="_blank" className="bottomImgs a2"><img src={img1_1} alt="" className="bottomImgs2" /></a>
       <a href="https://github.com/PIDAOFinance" target="_blank" className="bottomImgs a2"><img src={img1_2} alt="" className="bottomImgs2" /></a>
-      <a href="https://medium.com/@PIDAOFinance" target="_blank" className="bottomImgs a2"><img src={medium} alt="" className="bottomImgs2" /></a>
+      <a href="https://discord.com/invite/hPRwxePEYV" target="_blank" className="bottomImgs a2"><img src={medium} alt="" className="bottomImgs2" /></a>
       <a href="https://t.me/PIDAOfinance" target="_blank" className="bottomImgs a"><img src={img1_4} alt="" className="bottomImgs2" /></a>
+      {/* <a href="https://discord.com/invite/hPRwxePEYV" target="_blank" className="bottomImgs a"><img src={DiscordImg} alt="" className="bottomImgs2" /></a> */}
     </div>
     {menu ?
       <div className="moban" onClick={() => ShowhideClick()} >
         <div className="CaiDanlieBiao">
           <img src={Logoimg} alt="" className="logo2" />
           <div className="lis2"><a target="_blank" className="a" href="https://pidao.gitbook.io/homepage/whitepapers/pidao-pro">PIDAO Pro</a></div>
-          <div className="lis2"><a className="a" href="/">Stake</a></div>
-          <div className="lis2"><a className="a" href="/">Bond</a></div>
+          <div className="lis2"><a className="a" href="/stake">Stake</a></div>
+          <div className="lis2"><a className="a" href="/bonds">Bond</a></div>
           <div className="lis2"><a target="_blank" className="a" href="https://pidao.gitbook.io/homepage/pidao-finance/faqs">FAQs</a></div>
           <div className="lis2"><a target="_blank" className="a" href="https://pidao.gitbook.io/homepage/community/governance">Get Involved</a></div>
           {/* <a href="https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-OlympusDAO-v1.0.pdf" target="_blank" ><img src={ShenJiImg1} alt="" className="shenji2" /></a>

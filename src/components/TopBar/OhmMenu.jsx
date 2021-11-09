@@ -93,7 +93,7 @@ function OhmMenu() {
                   </Link>
 
                   <Link
-                    href={`https://pancakeswap.finance/add?inputCurrency=${daiAddress}&outputCurrency=${PID_ADDRESS}`}
+                    href={`https://pancakeswap.finance/add/${daiAddress}/${PID_ADDRESS}`}
                     target="_blank"
                     rel="noreferrer"
                   >
