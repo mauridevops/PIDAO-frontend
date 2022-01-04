@@ -203,22 +203,22 @@ function Home() {
         Reserve Currency
       </div>
       <div style={{ height: 30 }}></div>
-      {/* <div className="DaoJishi">
+      { <div className="DaoJishi">
         {isOpen ? <>
           <span>Launch in</span><TimeCountdown onComplete={onComplete} base={new Date} deadline={new Date(openOverTimes)} />
           
         </>:<>
           <span>ITO Application Ends In</span><TimeCountdown onComplete={onComplete} base={new Date} deadline={new Date(openStartTimes)} />
         </>} 
-      </div> */}
+      </div> }
 
-      {/* <div style={{ display: "flex", justifyContent: "center", }}>
+      { <div style={{ display: "flex", justifyContent: "center", }}>
        
        <a href="https://medium.com/@PIDAOFinance/initial-telegram-offering-the-pidao-fair-launch-event-fafc6ec009aa" style={{ color: "#fff" }} target="_blank">ITO Rules</a>
         <div style={{ width: 20 }} />
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfM6zyJyhaOcp-QmOzZmleU4wVthPP13x-HamiKO5cMiTwHUw/viewform" style={{ color: "#fff" }} target="_blank">Apply Now</a>
       
-      </div> */}
+      </div> }
       <div className="contentStyle">
         PIDAO is a decentralized reserve currency protocol based on the PID token and aims at building a community-owned decentralized financial infrastructure for the crypto world.
       </div>
@@ -293,7 +293,7 @@ const PAYSTATUS=({idoBalance,isPay,isOpen,busdAmount,openIsPayTime})=>{
     isPay
   })
   if(openIsPayTime === true){
-    return <PadingBaiMingDan_Box title={'ITO whitelist updating, please stay tuned with notice in the telegram group'}/>
+    return <PadingBaiMingDan_Box title={'IDO whitelist updating, please stay tuned with notice in the telegram group'}/>
   }
   if(idoBalance === null || isOpen === null){
     return <Pading_Box/>
@@ -339,10 +339,10 @@ function Inp_Box({idoBalance,busdAmount}) {
   }
   return <MinInp_Box>
     <div className="Content_Box1">
-      <span>Your ITO Quota</span>
+      <span>Your aSGU Quota</span>
     </div>
     <div className="Content_Box2">
-      <div>ITO Quota</div>
+      <div>aSGU Quota</div>
       <input type="text" placeholder={`${idoBalance}PID`} className="InpStyle" />
     </div>
     <div className="Content_Box2">
@@ -350,7 +350,7 @@ function Inp_Box({idoBalance,busdAmount}) {
       <input type="text" placeholder={`${busdAmount}BUSD`} disabled className="InpStyle" />
     </div>
     <div className="Content_Box3">
-    PIDAO project will launch on 12:00 8th Nov. 2021, you will be able to claim your PID token manually on the website. 
+    Destiny project will launch on 12:00 13th March. 2021, you will be able to claim your SGU token manually on the website. 
     </div>
 
     {address && hasAllowance() ? (
